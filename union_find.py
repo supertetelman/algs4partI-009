@@ -2,7 +2,6 @@
 '''Python implementation of Union-Find for Coursera Algorithm class questions'''
 
 import math
-import time
 
 __author__ = "Adam Tetelman"
 
