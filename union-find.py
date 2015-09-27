@@ -25,6 +25,10 @@ class Array:
 				self.tree[i] = int(tree[i])
 				self.tree_size[i] = 1 #TODO - Implement size calculations in Array
 				self.tree_height[i] = 1 #TODO - Implement height calculations
+
+	def __str__(self):
+		return "\n".join(["size:%d" %(self.size), \
+			"array:" + ' '.join(str(i) for i in self.tree.values())])
 		
 	def union(self,a,b):
 		val = self.tree[a]
@@ -37,12 +41,13 @@ class Array:
 	def connected(self,a,b):
 		return self.tree[a] == self.tree[b]
 
-	def printme(self):
-		print "size:%d" %(self.size)
-		print "array:" + ' '.join(str(i) for i in self.tree.values())
-
 
 class Tree(Array):
+
+	def __str__(self):
+		return "\n".join(["size:%d" %(self.size), \
+			"array:" + ' '.join(str(i) for i in self.tree.values()), \
+			"tree_size:" + ' '.join(str(i) for i in self.tree_size.values())])
 
 	def get_root(self,a,ret_depth=False):
 		val = self.tree[a]
@@ -74,11 +79,6 @@ class Tree(Array):
 			while val != self.tree[val]:
 				val = self.tree[val]
 				self.tree_size[val] += 1
-
-	def printme(self):
-		print "size:%d" %(self.size)
-		print "tree:" + ' '.join(str(i) for i in self.tree.values())
-		print "tree_size:" + ' '.join(str(i) for i in self.tree_size.values())
 
 
 class WeightedTree(Tree):
@@ -144,10 +144,11 @@ class ValidateWeightedTree(WeightedTree):
 
 	def validate(self):
 		if self.test_loops() and self.test_parent_size() and self.test_forest_size():
-			self.printme()
+			print self
 			return True
 		else:
 			return False
+
 
 def iterate_string(test,string,printme,f):
 	'''Return a list of tuples'''
@@ -160,7 +161,7 @@ def iterate_string(test,string,printme,f):
 			res.append(test.connected(int(set[0]),int(set[1])))
 		if printme:
 			print tuple
-			test.printme()
+			print test
 	return res
 
 
@@ -208,17 +209,11 @@ test7 = ValidateWeightedTree(t5)
 do_unions(test,u1)
 do_unions(test2,u2)
 
-test2.printme()
+print test2
 
-print 'solution'
-test.printme()
-test2.printme()
+print "\n".join(['solution', str(test), str(test2)])
 
-print 'validations'
-print test3.validate()
-print test4.validate()
-print test5.validate()
-print test6.validate()
-print test7.validate()
+print "\n".join(['validations', str(test3), str(test4), \
+	str(test5), str(test6), str(test7)])
 
 exit()
