@@ -60,7 +60,7 @@ def test_sort(test, k, printme = False):
 
     if printme:
         print "\n".join(str(l) for l in [test1, test2, test3])
-        return -1
+    return test1
 
 
 def create_semi_sorted(N, j=10, k=2, printme=False):
@@ -84,8 +84,10 @@ k = [11, 7, 5, 3, 1]
 
 test = range(N)
 test2 = create_semi_sorted(N)
+test3 = ['a', 'f', 'z', 'x', 'b', 'a', 'e']
 shuffle(test)
 
 test_shuffle(N)
 test_sort(test,k)
 test_sort(test2,k)
+test_sort(test3,k)
